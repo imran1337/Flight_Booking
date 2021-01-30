@@ -13,7 +13,7 @@ function handleTicket(
   isIncrease
 ) {
   document.getElementById(quantityBtnId).addEventListener("click", () => {
-    const ticketInputID = document.getElementById(ticketInputId);
+    const ticketInputID = document.getElementById(ticketInputId + '_input');
     let ticketQuantityCount = parseInt(ticketInputID.value);
     if (isIncrease == true) {
       ticketInputID.value = ++ticketQuantityCount;
@@ -38,28 +38,28 @@ function handleTicket(
 
 handleTicket(
   "vip_ticket_quantity_increase",
-  "vip_ticket_input",
+  "vip_ticket",
   "vip",
   150,
   true
 );
 handleTicket(
   "vip_ticket_quantity_decrease",
-  "vip_ticket_input",
+  "vip_ticket",
   "vip",
   150,
   false
 );
 handleTicket(
   "economy_ticket_quantity_increase",
-  "economy_ticket_input",
+  "economy_ticket",
   "economy",
   100,
   true
 );
 handleTicket(
   "economy_ticket_quantity_decrease",
-  "economy_ticket_input",
+  "economy_ticket",
   "economy",
   100,
   false

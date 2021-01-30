@@ -13,7 +13,7 @@ function handleTicket(
   isIncrease
 ) {
   document.getElementById(quantityBtnId).addEventListener("click", () => {
-    const ticketInputID = document.getElementById(ticketInputId + '_input');
+    const ticketInputID = document.getElementById(ticketInputId + "_input");
     let ticketQuantityCount = parseInt(ticketInputID.value);
     if (isIncrease == true) {
       ticketInputID.value = ++ticketQuantityCount;
@@ -36,34 +36,10 @@ function handleTicket(
   });
 }
 
-handleTicket(
-  "vip_ticket_quantity_increase",
-  "vip_ticket",
-  "vip",
-  150,
-  true
-);
-handleTicket(
-  "vip_ticket_quantity_decrease",
-  "vip_ticket",
-  "vip",
-  150,
-  false
-);
-handleTicket(
-  "economy_ticket_quantity_increase",
-  "economy_ticket",
-  "economy",
-  100,
-  true
-);
-handleTicket(
-  "economy_ticket_quantity_decrease",
-  "economy_ticket",
-  "economy",
-  100,
-  false
-);
+handleTicket("vip_ticket_quantity_increase", "vip_ticket", "vip", 150, true);
+handleTicket("vip_ticket_quantity_decrease", "vip_ticket", "vip", 150, false);
+handleTicket("economy_ticket_quantity_increase", "economy_ticket", "economy", 100, true);
+handleTicket("economy_ticket_quantity_decrease", "economy_ticket", "economy", 100, false);
 
 // cart total working area
 function totalMoneyUpdater() {
@@ -146,42 +122,27 @@ function ticketFormMoneyReset() {
   economyTicketTotalAmount = 0;
   document.getElementById("ticket_book_from").value = "";
   document.getElementById("ticket_book_goFor").value = "";
-  document
-    .querySelectorAll("input[type=date]")
-    .forEach((date) => (date.value = ""));
+  document.querySelectorAll("input[type=date]")
+  .forEach((date) => (date.value = ""));
   totalMoneyUpdater();
 }
 
 // arrow press to increase or decrease ticket quantity
 function arrowBtnQuantityCounter(ticketInput, ticketBtn, isIncrease) {
-  document.getElementById(ticketInput + '_ticket_input').addEventListener("keyup", (event) => {
-    event.keyCode === 38 && isIncrease == true
-      ? document.getElementById(ticketBtn).click()
-      : null;
-    event.keyCode === 40 && isIncrease == false
-      ? document.getElementById(ticketBtn).click()
-      : null;
-    event.preventDefault();
-  });
+  document
+    .getElementById(ticketInput + "_ticket_input")
+    .addEventListener("keyup", (event) => {
+      event.keyCode === 38 && isIncrease == true
+        ? document.getElementById(ticketBtn).click()
+        : null;
+      event.keyCode === 40 && isIncrease == false
+        ? document.getElementById(ticketBtn).click()
+        : null;
+      event.preventDefault();
+    });
 }
 
-arrowBtnQuantityCounter(
-  "vip",
-  "vip_ticket_quantity_increase",
-  true
-);
-arrowBtnQuantityCounter(
-  "vip",
-  "vip_ticket_quantity_decrease",
-  false
-);
-arrowBtnQuantityCounter(
-  "economy",
-  "economy_ticket_quantity_increase",
-  true
-);
-arrowBtnQuantityCounter(
-  "economy",
-  "economy_ticket_quantity_decrease",
-  false
-);
+arrowBtnQuantityCounter("vip", "vip_ticket_quantity_increase", true);
+arrowBtnQuantityCounter("vip", "vip_ticket_quantity_decrease", false);
+arrowBtnQuantityCounter("economy", "economy_ticket_quantity_increase", true);
+arrowBtnQuantityCounter("economy", "economy_ticket_quantity_decrease", false);

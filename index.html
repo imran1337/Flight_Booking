@@ -12,6 +12,7 @@
         rel="stylesheet">
     <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/19429fea38.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -33,11 +34,11 @@
             <h3>Booking Flights</h3>
             <div class="input-group">
                 <label for="">Flying From</label>
-                <input id="ticket_book_from" class="inp-style" type="text" name="" value="Dhake, Bangladesh" placeholder="Dhake, Bangladesh">
+                <input id="ticket_book_from" class="inp-style" type="text" name="" value="" placeholder="Dhake, Bangladesh">
             </div>
             <div class="input-group">
                 <label for="">Flying To</label>
-                <input id="ticket_book_goFor" class="inp-style" type="text" name="" value="New York, United States" placeholder="Dhake, Bangladesh">
+                <input id="ticket_book_goFor" class="inp-style" type="text" name="" value="" placeholder="New York, United States">
             </div>
             <div class="inputs">
                 <div class="input-group">
@@ -51,26 +52,26 @@
             </div>
             <div class="input-group f-class">
                 <div>
-                    <label for="">First Class ($<span id="vip_ticket_total">0</span>)</label>
+                    <label for="">First Class ($150)</label>
                     <input class="inp-style inp-width" type="number" name="" id="vip_ticket_input" value="0" readonly>
                 </div>
-                <div class="plus-minus-btn" style="display: flex;">
-                    <p id="vip_ticket_quantity_increase" style="margin-right: 35px;">+</p>
-                    <p id="vip_ticket_quantity_decrease">-</p>
+                <div class="plus-minus-btn d-flex">
+                    <i id="vip_ticket_quantity_increase" class="fas fa-plus me-4"></i>
+                    <i id="vip_ticket_quantity_decrease" class="fas fa-minus"></i>
                 </div>
             </div>
             
             <div class="input-group f-class">
                 <div>
-                    <label for="">Economy ($<span id="economy_ticket_total">0</span>)</label>
+                    <label for="">Economy ($100)</label>
                     <input class="inp-style inp-width" type="number" name="" id="economy_ticket_input" value="0" readonly>
                 </div>
                 <!-- <div class="plus-minus-btn">
                     <p> <span>+</span> <span>-</span> </p>
                 </div> -->
-                <div class="plus-minus-btn" style="display: flex;">
-                    <p id="economy_ticket_quantity_increase" style="margin-right: 35px;">+</p>
-                    <p id="economy_ticket_quantity_decrease">-</p>
+                <div class="plus-minus-btn d-flex">
+                    <i id="economy_ticket_quantity_increase" class="fas fa-plus me-4"></i>
+                    <i id="economy_ticket_quantity_decrease" class="fas fa-minus"></i>
                 </div>
             </div>
             <div class="calculations">

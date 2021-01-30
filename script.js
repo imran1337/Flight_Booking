@@ -3,10 +3,13 @@ function captureId(idName) {
   return document.getElementById(idName);
 }
 
+let vipTicketTotalAmount = 0;
+let economyTicketTotalAmount = 0;
+
 function handleTicket(
   quantityBtnId,
   ticketInputId,
-  ticketTotalId,
+  ticketTotalVar,
   ticketPrice,
   isIncrease
 ) {
@@ -19,7 +22,15 @@ function handleTicket(
         ? (captureId(ticketInputId).value = --ticketQuantityCount)
         : null;
     }
-    captureId(ticketTotalId).innerText = ticketQuantityCount * ticketPrice;
+
+    // ticketTotal amount
+    ticketTotalVar == "vip_ticket_total"
+      ? (vipTicketTotalAmount = ticketQuantityCount * ticketPrice)
+      : (economyTicketTotalAmount = ticketQuantityCount * ticketPrice);
+
+    // get sub Total money
+    getSubTotal(vipTicketTotalAmount, economyTicketTotalAmount);
+
     // click to update money function call
     totalMoneyUpdater();
   });
@@ -54,17 +65,16 @@ handleTicket(
   false
 );
 
+// get Total Money
+function getSubTotal(vip, economy) {
+  captureId("sub_total").innerText = vip + economy;
+}
+
 // cart total working area
 function totalMoneyUpdater() {
   const subTotalMoney = captureId("sub_total");
   const totalTax = captureId("total_tax");
-
-  subTotalMoney.innerText =
-    parseInt(captureId("vip_ticket_total").innerText) +
-    parseInt(captureId("economy_ticket_total").innerText);
-
   totalTax.innerText = parseFloat(subTotalMoney.innerText) * 0.1;
-
   captureId("grand_total").innerText =
     parseFloat(subTotalMoney.innerText) + parseFloat(totalTax.innerText);
 }
@@ -102,7 +112,11 @@ function handleSweetAlert() {
   swalWithBootstrapButtons
     .fire({
       title: "Are you sure?",
-      text: `You want to buy ${ticketBookFrom.value} to ${ticketGoTo.value} ticket`,
+      text: `You want to book ${
+        ticketBookFrom.value.length > 0 && ticketBookFrom.value != ""
+          ? ticketBookFrom.value + " to " + ticketGoTo.value
+          : ""
+      } ticket`,
       icon: "warning",
       showCancelButton: true,
       confirmButtonText: "Yes, book it!",
@@ -113,22 +127,69 @@ function handleSweetAlert() {
       if (result.isConfirmed) {
         swalWithBootstrapButtons.fire(
           `Hello Sir`,
-          `${vipTicket.value} VIP & ${economyTicket.value} ECONOMY ticket booked successfully`,
+          `Your ${vipTicket.value > 0 ? vipTicket.value + " VIP" : ""} ${
+            economyTicket.value > 0 ? economyTicket.value + " ECONOMY" : ""
+          } ticket booked successfully`,
           "success"
         );
         // ticket form reset
-        vipTicket.value = 0;
-        economyTicket.value = 0;
-        captureId("sub_total").innerText = 0;
-        captureId("vip_ticket_total").innerText = 0;
-        captureId("economy_ticket_total").innerText = 0;
-        totalMoneyUpdater();
+        ticketFormMoneyReset();
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         swalWithBootstrapButtons.fire(
           "Cancelled",
-          `${vipTicket.value} VIP & ${economyTicket.value} ECONOMY ticket`,
+          `${vipTicket.value > 0 ? vipTicket.value + " VIP" : ""} ${
+            economyTicket.value > 0 ? economyTicket.value + " ECONOMY" : ""
+          } ticket`,
           "error"
         );
+        // ticket form reset
+        ticketFormMoneyReset();
       }
     });
 }
+// ticket form reset
+function ticketFormMoneyReset() {
+  captureId("vip_ticket_input").value = 0;
+  captureId("economy_ticket_input").value = 0;
+  captureId("sub_total").innerText = 0;
+  captureId("ticket_book_from").value = "";
+  captureId("ticket_book_goFor").value = "";
+  document
+    .querySelectorAll("input[type=date]")
+    .forEach((date) => (date.value = ""));
+  totalMoneyUpdater();
+}
+
+// arrow press to increase or decrease ticket quantity
+function arrowBtnQuantityCounter(ticketInput, ticketBtn, isIncrease) {
+  captureId(ticketInput).addEventListener("keyup", (event) => {
+    event.keyCode === 38 && isIncrease == true
+      ? captureId(ticketBtn).click()
+      : null;
+    event.keyCode === 40 && isIncrease == false
+      ? captureId(ticketBtn).click()
+      : null;
+      event.preventDefault();
+  });
+}
+
+arrowBtnQuantityCounter(
+  "vip_ticket_input",
+  "vip_ticket_quantity_increase",
+  true
+);
+arrowBtnQuantityCounter(
+  "vip_ticket_input",
+  "vip_ticket_quantity_decrease",
+  false
+);
+arrowBtnQuantityCounter(
+  "economy_ticket_input",
+  "economy_ticket_quantity_increase",
+  true
+);
+arrowBtnQuantityCounter(
+  "economy_ticket_input",
+  "economy_ticket_quantity_decrease",
+  false
+);

@@ -21,7 +21,6 @@ nav {
 }
 .container {
   width: 1200px;
-  max-width: 85%;
   margin: 0 auto;
 }
 nav ul {
@@ -33,10 +32,12 @@ nav ul li a {
   color: #fff;
   padding: 10px;
   text-transform: uppercase;
+  text-decoration: none;
 }
 nav ul li a:hover,
 a.active {
-  background-color: #3352f2;
+  color: #000;
+  background-color: #3353f2fd;
   border-radius: 5px;
 }
 .main-content {
@@ -123,7 +124,7 @@ a.active {
 }
 
 input[type="number"] {
-  outline: none;
+  /* outline: none; */
   font-weight: bold;
   font-size: 1.5rem;
 }

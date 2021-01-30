@@ -1,8 +1,7 @@
-//capture id
-// function captureId.getElementById(idName) {
-//   return document.getElementById(idName);
-// }
-
+//variables 
+const subTotalMoney = document.getElementById("sub_total");
+const vipTicket = document.getElementById("vip_ticket_input");
+const economyTicket = document.getElementById("economy_ticket_input");
 let vipTicketTotalAmount = 0;
 let economyTicketTotalAmount = 0;
 
@@ -14,12 +13,13 @@ function handleTicket(
   isIncrease
 ) {
   document.getElementById(quantityBtnId).addEventListener("click", () => {
-    let ticketQuantityCount = parseInt(document.getElementById(ticketInputId).value);
+    const ticketInputID = document.getElementById(ticketInputId);
+    let ticketQuantityCount = parseInt(ticketInputID.value);
     if (isIncrease == true) {
-      document.getElementById(ticketInputId).value = ++ticketQuantityCount;
+      ticketInputID.value = ++ticketQuantityCount;
     } else {
       ticketQuantityCount > 0
-        ? (document.getElementById(ticketInputId).value = --ticketQuantityCount)
+        ? (ticketInputID.value = --ticketQuantityCount)
         : null;
     }
 
@@ -28,8 +28,9 @@ function handleTicket(
       ? (vipTicketTotalAmount = ticketQuantityCount * ticketPrice)
       : (economyTicketTotalAmount = ticketQuantityCount * ticketPrice);
 
-    // get sub Total money
-    getSubTotal(vipTicketTotalAmount, economyTicketTotalAmount);
+    // showing money to Total money
+    subTotalMoney.innerText =
+      vipTicketTotalAmount + economyTicketTotalAmount;
 
     // click to update money function call
     totalMoneyUpdater();
@@ -65,14 +66,8 @@ handleTicket(
   false
 );
 
-// get Total Money
-function getSubTotal(vip, economy) {
-  document.getElementById("sub_total").innerText = vip + economy;
-}
-
 // cart total working area
 function totalMoneyUpdater() {
-  const subTotalMoney = document.getElementById("sub_total");
   const totalTax = document.getElementById("total_tax");
   totalTax.innerText = parseFloat(subTotalMoney.innerText) * 0.1;
   document.getElementById("grand_total").innerText =
@@ -80,9 +75,8 @@ function totalMoneyUpdater() {
 }
 
 // book now btn working area
-document.getElementById("book_now").addEventListener("click", () => {
-  const vipTicket = document.getElementById("vip_ticket_input");
-  const economyTicket = document.getElementById("economy_ticket_input");
+document.getElementById('book_now').addEventListener("click", () => {
+ ;
   if (vipTicket.value > 0 || economyTicket.value > 0) {
     handleSweetAlert();
   } else {
@@ -98,8 +92,6 @@ document.getElementById("book_now").addEventListener("click", () => {
 function handleSweetAlert() {
   const ticketBookFrom = document.getElementById("ticket_book_from");
   const ticketGoTo = document.getElementById("ticket_book_goFor");
-  const vipTicket = document.getElementById("vip_ticket_input");
-  const economyTicket = document.getElementById("economy_ticket_input");
   // sweetAlert
   const swalWithBootstrapButtons = Swal.mixin({
     customClass: {
@@ -146,11 +138,14 @@ function handleSweetAlert() {
       }
     });
 }
+
 // ticket form reset
 function ticketFormMoneyReset() {
-  document.getElementById("vip_ticket_input").value = 0;
-  document.getElementById("economy_ticket_input").value = 0;
-  document.getElementById("sub_total").innerText = 0;
+  vipTicket.value = 0;
+  economyTicket.value = 0;
+  subTotalMoney.innerText = 0;
+  vipTicketTotalAmount = 0;
+  economyTicketTotalAmount = 0;
   document.getElementById("ticket_book_from").value = "";
   document.getElementById("ticket_book_goFor").value = "";
   document
@@ -168,7 +163,7 @@ function arrowBtnQuantityCounter(ticketInput, ticketBtn, isIncrease) {
     event.keyCode === 40 && isIncrease == false
       ? document.getElementById(ticketBtn).click()
       : null;
-      event.preventDefault();
+    event.preventDefault();
   });
 }
 
@@ -192,3 +187,4 @@ arrowBtnQuantityCounter(
   "economy_ticket_quantity_decrease",
   false
 );
+

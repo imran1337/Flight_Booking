@@ -31,7 +31,7 @@ function handleTicket(
     // showing money to Sub Total money
     subTotalMoney.innerText = vipTicketTotalAmount + economyTicketTotalAmount;
 
-    // click to update money function call
+    // click to update moneyUpdater function call
     totalMoneyUpdater();
   });
 }
@@ -113,7 +113,7 @@ function handleSweetAlert() {
     });
 }
 
-// ticket form reset
+// ticket form & money
 function ticketFormMoneyReset() {
   vipTicket.value = 0;
   economyTicket.value = 0;

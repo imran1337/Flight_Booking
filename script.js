@@ -1,4 +1,4 @@
-//variables 
+//variables
 const subTotalMoney = document.getElementById("sub_total");
 const vipTicket = document.getElementById("vip_ticket_input");
 const economyTicket = document.getElementById("economy_ticket_input");
@@ -8,7 +8,7 @@ let economyTicketTotalAmount = 0;
 function handleTicket(
   quantityBtnId,
   ticketInputId,
-  ticketTotalVar,
+  ticketCategory,
   ticketPrice,
   isIncrease
 ) {
@@ -24,13 +24,12 @@ function handleTicket(
     }
 
     // ticketTotal amount
-    ticketTotalVar == "vip_ticket_total"
+    ticketCategory == "vip"
       ? (vipTicketTotalAmount = ticketQuantityCount * ticketPrice)
       : (economyTicketTotalAmount = ticketQuantityCount * ticketPrice);
 
-    // showing money to Total money
-    subTotalMoney.innerText =
-      vipTicketTotalAmount + economyTicketTotalAmount;
+    // showing money to Sub Total money
+    subTotalMoney.innerText = vipTicketTotalAmount + economyTicketTotalAmount;
 
     // click to update money function call
     totalMoneyUpdater();
@@ -40,28 +39,28 @@ function handleTicket(
 handleTicket(
   "vip_ticket_quantity_increase",
   "vip_ticket_input",
-  "vip_ticket_total",
+  "vip",
   150,
   true
 );
 handleTicket(
   "vip_ticket_quantity_decrease",
   "vip_ticket_input",
-  "vip_ticket_total",
+  "vip",
   150,
   false
 );
 handleTicket(
   "economy_ticket_quantity_increase",
   "economy_ticket_input",
-  "economy_ticket_total",
+  "economy",
   100,
   true
 );
 handleTicket(
   "economy_ticket_quantity_decrease",
   "economy_ticket_input",
-  "economy_ticket_total",
+  "economy",
   100,
   false
 );
@@ -75,8 +74,7 @@ function totalMoneyUpdater() {
 }
 
 // book now btn working area
-document.getElementById('book_now').addEventListener("click", () => {
- ;
+document.getElementById("book_now").addEventListener("click", () => {
   if (vipTicket.value > 0 || economyTicket.value > 0) {
     handleSweetAlert();
   } else {
@@ -156,7 +154,7 @@ function ticketFormMoneyReset() {
 
 // arrow press to increase or decrease ticket quantity
 function arrowBtnQuantityCounter(ticketInput, ticketBtn, isIncrease) {
-  document.getElementById(ticketInput).addEventListener("keyup", (event) => {
+  document.getElementById(ticketInput + '_ticket_input').addEventListener("keyup", (event) => {
     event.keyCode === 38 && isIncrease == true
       ? document.getElementById(ticketBtn).click()
       : null;
@@ -168,23 +166,22 @@ function arrowBtnQuantityCounter(ticketInput, ticketBtn, isIncrease) {
 }
 
 arrowBtnQuantityCounter(
-  "vip_ticket_input",
+  "vip",
   "vip_ticket_quantity_increase",
   true
 );
 arrowBtnQuantityCounter(
-  "vip_ticket_input",
+  "vip",
   "vip_ticket_quantity_decrease",
   false
 );
 arrowBtnQuantityCounter(
-  "economy_ticket_input",
+  "economy",
   "economy_ticket_quantity_increase",
   true
 );
 arrowBtnQuantityCounter(
-  "economy_ticket_input",
+  "economy",
   "economy_ticket_quantity_decrease",
   false
 );
-

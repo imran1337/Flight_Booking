@@ -1,7 +1,7 @@
 //capture id
-function captureId(idName) {
-  return document.getElementById(idName);
-}
+// function captureId.getElementById(idName) {
+//   return document.getElementById(idName);
+// }
 
 let vipTicketTotalAmount = 0;
 let economyTicketTotalAmount = 0;
@@ -13,13 +13,13 @@ function handleTicket(
   ticketPrice,
   isIncrease
 ) {
-  captureId(quantityBtnId).addEventListener("click", () => {
-    let ticketQuantityCount = parseInt(captureId(ticketInputId).value);
+  document.getElementById(quantityBtnId).addEventListener("click", () => {
+    let ticketQuantityCount = parseInt(document.getElementById(ticketInputId).value);
     if (isIncrease == true) {
-      captureId(ticketInputId).value = ++ticketQuantityCount;
+      document.getElementById(ticketInputId).value = ++ticketQuantityCount;
     } else {
       ticketQuantityCount > 0
-        ? (captureId(ticketInputId).value = --ticketQuantityCount)
+        ? (document.getElementById(ticketInputId).value = --ticketQuantityCount)
         : null;
     }
 
@@ -67,22 +67,22 @@ handleTicket(
 
 // get Total Money
 function getSubTotal(vip, economy) {
-  captureId("sub_total").innerText = vip + economy;
+  document.getElementById("sub_total").innerText = vip + economy;
 }
 
 // cart total working area
 function totalMoneyUpdater() {
-  const subTotalMoney = captureId("sub_total");
-  const totalTax = captureId("total_tax");
+  const subTotalMoney = document.getElementById("sub_total");
+  const totalTax = document.getElementById("total_tax");
   totalTax.innerText = parseFloat(subTotalMoney.innerText) * 0.1;
-  captureId("grand_total").innerText =
+  document.getElementById("grand_total").innerText =
     parseFloat(subTotalMoney.innerText) + parseFloat(totalTax.innerText);
 }
 
 // book now btn working area
-captureId("book_now").addEventListener("click", () => {
-  const vipTicket = captureId("vip_ticket_input");
-  const economyTicket = captureId("economy_ticket_input");
+document.getElementById("book_now").addEventListener("click", () => {
+  const vipTicket = document.getElementById("vip_ticket_input");
+  const economyTicket = document.getElementById("economy_ticket_input");
   if (vipTicket.value > 0 || economyTicket.value > 0) {
     handleSweetAlert();
   } else {
@@ -96,10 +96,10 @@ captureId("book_now").addEventListener("click", () => {
 
 // sweet alert function
 function handleSweetAlert() {
-  const ticketBookFrom = captureId("ticket_book_from");
-  const ticketGoTo = captureId("ticket_book_goFor");
-  const vipTicket = captureId("vip_ticket_input");
-  const economyTicket = captureId("economy_ticket_input");
+  const ticketBookFrom = document.getElementById("ticket_book_from");
+  const ticketGoTo = document.getElementById("ticket_book_goFor");
+  const vipTicket = document.getElementById("vip_ticket_input");
+  const economyTicket = document.getElementById("economy_ticket_input");
   // sweetAlert
   const swalWithBootstrapButtons = Swal.mixin({
     customClass: {
@@ -108,7 +108,6 @@ function handleSweetAlert() {
     },
     buttonsStyling: false,
   });
-
   swalWithBootstrapButtons
     .fire({
       title: "Are you sure?",
@@ -149,11 +148,11 @@ function handleSweetAlert() {
 }
 // ticket form reset
 function ticketFormMoneyReset() {
-  captureId("vip_ticket_input").value = 0;
-  captureId("economy_ticket_input").value = 0;
-  captureId("sub_total").innerText = 0;
-  captureId("ticket_book_from").value = "";
-  captureId("ticket_book_goFor").value = "";
+  document.getElementById("vip_ticket_input").value = 0;
+  document.getElementById("economy_ticket_input").value = 0;
+  document.getElementById("sub_total").innerText = 0;
+  document.getElementById("ticket_book_from").value = "";
+  document.getElementById("ticket_book_goFor").value = "";
   document
     .querySelectorAll("input[type=date]")
     .forEach((date) => (date.value = ""));
@@ -162,12 +161,12 @@ function ticketFormMoneyReset() {
 
 // arrow press to increase or decrease ticket quantity
 function arrowBtnQuantityCounter(ticketInput, ticketBtn, isIncrease) {
-  captureId(ticketInput).addEventListener("keyup", (event) => {
+  document.getElementById(ticketInput).addEventListener("keyup", (event) => {
     event.keyCode === 38 && isIncrease == true
-      ? captureId(ticketBtn).click()
+      ? document.getElementById(ticketBtn).click()
       : null;
     event.keyCode === 40 && isIncrease == false
-      ? captureId(ticketBtn).click()
+      ? document.getElementById(ticketBtn).click()
       : null;
       event.preventDefault();
   });

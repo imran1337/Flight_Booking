@@ -57,7 +57,7 @@ document.getElementById("book_now").addEventListener("click", () => {
     Swal.fire({
       icon: "error",
       title: "Oops...",
-      text: "Please add ticked to buy!",
+      text: "Please add ticket to buy!",
     });
   }
 });
